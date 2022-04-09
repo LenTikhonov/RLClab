@@ -1,0 +1,15 @@
+C:\Users\User\source\repos\RLClab\RLClab\obj\Debug\netcoreapp3.1\RLClab.csproj.AssemblyReference.cache
+C:\Users\User\source\repos\RLClab\RLClab\obj\Debug\netcoreapp3.1\RLClab.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\source\repos\RLClab\RLClab\obj\Debug\netcoreapp3.1\RLClab.AssemblyInfoInputs.cache
+C:\Users\User\source\repos\RLClab\RLClab\obj\Debug\netcoreapp3.1\RLClab.AssemblyInfo.cs
+C:\Users\User\source\repos\RLClab\RLClab\obj\Debug\netcoreapp3.1\RLClab.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\RLClab\RLClab\bin\Debug\netcoreapp3.1\RLClab.exe
+C:\Users\User\source\repos\RLClab\RLClab\bin\Debug\netcoreapp3.1\RLClab.deps.json
+C:\Users\User\source\repos\RLClab\RLClab\bin\Debug\netcoreapp3.1\RLClab.runtimeconfig.json
+C:\Users\User\source\repos\RLClab\RLClab\bin\Debug\netcoreapp3.1\RLClab.runtimeconfig.dev.json
+C:\Users\User\source\repos\RLClab\RLClab\bin\Debug\netcoreapp3.1\RLClab.dll
+C:\Users\User\source\repos\RLClab\RLClab\bin\Debug\netcoreapp3.1\RLClab.pdb
+C:\Users\User\source\repos\RLClab\RLClab\obj\Debug\netcoreapp3.1\RLClab.dll
+C:\Users\User\source\repos\RLClab\RLClab\obj\Debug\netcoreapp3.1\RLClab.pdb
+C:\Users\User\source\repos\RLClab\RLClab\obj\Debug\netcoreapp3.1\RLClab.genruntimeconfig.cache
+C:\Users\User\source\repos\RLClab\RLClab\bin\Debug\netcoreapp3.1\BillInfo.yaml
