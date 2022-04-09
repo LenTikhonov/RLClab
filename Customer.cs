@@ -14,19 +14,19 @@ namespace RLClab
             this.name = name;
             this.bonus = bonus;
         }
-        public String getName()
+        public String GetName()
         {
             return name;
         }
-        public int getBonus()
+        public int GetBonus()
         {
             return bonus;
         }
-        public void receiveBonus(int bonus)
+        public void ReceiveBonus(int bonus)
         {
             this.bonus = bonus;
         }
-        public int useBonus(int needBonus)
+        public int UseBonus(int needBonus)
         {
             int bonusTaken;
             if (needBonus > bonus)
@@ -37,7 +37,7 @@ namespace RLClab
             else
             {
                 bonusTaken = needBonus;
-                bonus = bonus - needBonus;
+                bonus -= needBonus;
             }
             return bonusTaken;
         }

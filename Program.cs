@@ -74,9 +74,9 @@ namespace RLClab
                 int gid = Convert.ToInt32(result[0].Trim());
                 double price = Convert.ToDouble(result[1].Trim());
                 int qty = Convert.ToInt32(result[2].Trim());
-                b.addGoods(new Item(g[gid - 1], qty, price));
+                b.AddGoods(new Item(g[gid - 1], qty, price));
             }
-            string bill = b.statement();
+            string bill = b.Statement();
             Console.WriteLine(bill);
         }
     }

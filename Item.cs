@@ -16,15 +16,15 @@ namespace RLClab
             _quantity = quantity;
             _price = price;
         }
-        public int getQuantity()
+        public int GetQuantity()
         {
             return _quantity;
         }
-        public double getPrice()
+        public double GetPrice()
         {
             return _price;
         }
-        public Goods getGoods()
+        public Goods GetGoods()
         {
             return _Goods;
         }

@@ -17,15 +17,15 @@ namespace RLClab
             _title = title;
             _priceCode = priceCode;
         }
-        public int getPriceCode()
+        public int GetPriceCode()
         {
             return _priceCode;
         }
-        public void setPriceCode(int arg)
+        public void SetPriceCode(int priceCode)
         {
-            _priceCode = arg;
+            _priceCode = priceCode;
         }
-        public String getTitle()
+        public String GetTitle()
         {
             return _title;
         }
