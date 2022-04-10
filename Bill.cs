@@ -31,8 +31,8 @@ namespace RLClab
             {
                 //определить сумму для каждой строки
                 Item item = items.Current;
-                double discount = GetDiscount(item);
-                int bonus = GetBonus(item);
+                double discount = item.GetDiscount();
+                int bonus = item.GetBonus();
                 double usedBonus = GetUsedBonus(item, _customer);
                 // учитываем скидку и бонусы
                 double thisAmount = GetSumm(item) - discount - usedBonus;
@@ -44,18 +44,6 @@ namespace RLClab
             //Запомнить бонус клиента
             _customer.ReceiveBonus(totalBonus);
             return resultBill;
-        }
-
-        private static int GetBonus(Item item)
-        {
-            switch (item.GetGoods().GetPriceCode())
-            {
-                case Goods.REGULAR:
-                    return (int)(GetSumm(item) * 0.05);
-                case Goods.SALE:
-                    return (int)(GetSumm(item) * 0.01);
-            }
-            return 0;
         }
 
         private static double GetUsedBonus(Item item, Customer customer)
@@ -75,25 +63,7 @@ namespace RLClab
             return 0;
         }
 
-        private static double GetDiscount(Item item)
-        {
-            switch (item.GetGoods().GetPriceCode())
-            {
-                case Goods.REGULAR:
-                    if (item.GetQuantity() > 2)
-                        return GetSumm(item) * 0.03; // 3%
-                    break;
-                case Goods.SPECIAL_OFFER:
-                    if (item.GetQuantity() > 10)
-                        return (GetSumm(item)) * 0.005; // 0.5%
-                    break;
-                case Goods.SALE:
-                    if (item.GetQuantity() > 3)
-                        return GetSumm(item) * 0.01; // 0.1%
-                    break;
-            }
-            return 0;
-        }
+
 
         private static string GetHeader(string customerName)
         {
