@@ -21,7 +21,7 @@ namespace RLClab
             _items.Add(item);
         }
 
-        public String Statement() //GetBill
+        public String Statement()
         {
             double totalAmount = 0;
             int totalBonus = 0;

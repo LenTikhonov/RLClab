@@ -39,7 +39,6 @@ namespace RLClab
                 result = line.Split(':');
                 result = result[1].Trim().Split();
                 string type = result[1].Trim();
-                int t = 0;
 
 
                 g[i] = new Goods(result[0]);
