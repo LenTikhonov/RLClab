@@ -21,7 +21,7 @@ namespace RLClab
             _items.Add(item);
         }
 
-        public String Statement()
+        public String Statement() //GetBill
         {
             double totalAmount = 0;
             int totalBonus = 0;
@@ -48,18 +48,15 @@ namespace RLClab
 
         private static double GetUsedBonus(Item item, Customer customer)
         {
-            switch (item.GetGoods().GetPriceCode())
-            {
-                case Goods.REGULAR:
-                    // используем бонусы
-                    if (item.GetQuantity() > 5)
-                        return customer.UseBonus((int)(GetSumm(item)));
-                    break;
-                case Goods.SPECIAL_OFFER:
-                    if (item.GetQuantity() > 1)
-                        return customer.UseBonus((int)(GetSumm(item)));
-                    break;
-            }
+            if (item.GetGoods().GetType() == typeof(RegularGoods))
+                // используем бонусы
+                if (item.GetQuantity() > 5)
+                    return customer.UseBonus((int)(GetSumm(item)));
+
+            if (item.GetGoods().GetType() == typeof(SpecialGoods))
+                if (item.GetQuantity() > 1)
+                    return customer.UseBonus((int)(GetSumm(item)));
+
             return 0;
         }
 
