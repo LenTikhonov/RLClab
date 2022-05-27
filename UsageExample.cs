@@ -15,7 +15,7 @@ namespace RLClab
             Item i2 = new Item(pepsi, 3, 50);
             Customer x = new Customer("test", 10);
             IView view = new TxtView();
-            Bill b1 = new Bill(x, view);
+            Bill b1 = new Bill(x);
             b1.AddGoods(i1);
             b1.AddGoods(i2);
             BillGenerator generator = new BillGenerator(b1, view);

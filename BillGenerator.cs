@@ -21,11 +21,9 @@ namespace RLClab
             BillSummary bill = _bill.Process();
 
             string resultBill = _view.GetHeader(bill.CustomerName);
-            List<ItemSummary>.Enumerator enumerator = bill.Items.GetEnumerator();
-            while (enumerator.MoveNext())
+            List<ItemSummary> items = bill.Items;
+            foreach (var item in items)
             {
-
-                ItemSummary item = enumerator.Current;
                 resultBill += _view.GetBody(item);
             }
             resultBill += _view.GetFooter(bill.TotalAmount, bill.TotalBonus);

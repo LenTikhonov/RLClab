@@ -15,7 +15,7 @@ namespace RLCTest
             Item i3 = new Item(food, 5, 130);
             Customer x = new Customer("Len", 0);
             IView view = new TxtView();
-            Bill bill = new Bill(x, view);
+            Bill bill = new Bill(x);
             bill.AddGoods(i3);
             BillGenerator generator = new BillGenerator(bill, view);
             string actual = generator.Generate();
@@ -30,7 +30,7 @@ namespace RLCTest
             Item i1 = new Item(food1, 2, 22);
             Customer x = new Customer("Len", 0);
             IView view = new TxtView();
-            Bill bill = new Bill(x, view);
+            Bill bill = new Bill(x);
             bill.AddGoods(i1);
             BillGenerator generator = new BillGenerator(bill, view);
             string actual = generator.Generate();
@@ -45,7 +45,7 @@ namespace RLCTest
             Item i2 = new Item(food2, 3, 15);
             Customer x = new Customer("Len", 0);
             IView view = new TxtView();
-            Bill bill = new Bill(x, view);
+            Bill bill = new Bill(x);
             bill.AddGoods(i2);
             BillGenerator generator = new BillGenerator(bill, view);
             string actual = generator.Generate();
@@ -59,7 +59,7 @@ namespace RLCTest
             Item i3 = new Item(food3, 11, 55);
             Customer x = new Customer("Len", 0);
             IView view = new TxtView();
-            Bill bill = new Bill(x, view);
+            Bill bill = new Bill(x);
             bill.AddGoods(i3);
             BillGenerator generator = new BillGenerator(bill, view);
             string actual = generator.Generate();
@@ -74,7 +74,7 @@ namespace RLCTest
             Item i1 = new Item(food4, 4, 24);
             Customer x = new Customer("Len", 0);
             IView view = new TxtView();
-            Bill bill = new Bill(x, view);
+            Bill bill = new Bill(x);
             bill.AddGoods(i1);
             BillGenerator generator = new BillGenerator(bill, view);
             string actual = generator.Generate();
@@ -89,7 +89,7 @@ namespace RLCTest
             Item i2 = new Item(food5, 5, 85);
             Customer x = new Customer("Len", 0);
             IView view = new TxtView();
-            Bill bill = new Bill(x, view);
+            Bill bill = new Bill(x);
             bill.AddGoods(i2);
             BillGenerator generator = new BillGenerator(bill, view);
             string actual = generator.Generate();
@@ -103,7 +103,7 @@ namespace RLCTest
             Item i3 = new Item(food5, 3, 42);
             Customer x = new Customer("Len", 500);
             IView view = new TxtView();
-            Bill bill = new Bill(x, view);
+            Bill bill = new Bill(x);
             bill.AddGoods(i3);
             BillGenerator generator = new BillGenerator(bill, view);
             string actual = generator.Generate();
@@ -118,7 +118,7 @@ namespace RLCTest
             Item i1 = new Item(food6, 7, 12);
             Customer x = new Customer("Len", 500);
             IView view = new TxtView();
-            Bill bill = new Bill(x, view);
+            Bill bill = new Bill(x);
             bill.AddGoods(i1);
             BillGenerator generator = new BillGenerator(bill, view);
             string actual = generator.Generate();

@@ -1,4 +1,5 @@
 ﻿using System;
+using RLClab.BillUpdate;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,12 @@ namespace RLClab
             _quantity = quantity;
             _price = price;
         }
+
+        public String GetTitle()
+        {
+            return _Goods.GetTitle();
+        }
+
         public int GetQuantity()
         {
             return _quantity;
@@ -24,18 +31,38 @@ namespace RLClab
         {
             return _price;
         }
-        public Goods GetGoods()
-        {
-            return _Goods;
-        }
         public int GetBonus()
         {
             return _Goods.GetBonus(this);
         }
 
+        public virtual double GetUsedBonus(Customer customer)
+        {
+            return _Goods.GetUsedBonus(this, customer);
+        }
+
         public double GetDiscount()
         {
             return _Goods.GetDiscount(this);
+        }
+
+        public double GetSumm()
+        {
+            return GetQuantity() * GetPrice();
+        }
+
+        public ItemSummary GetItemSummary()
+        {
+            return new ItemSummary
+            {
+                Name = GetTitle(),
+                Price = GetPrice(),
+                Quantity = GetQuantity(),
+                Sum = GetSumm(),
+                Discount = GetDiscount(),
+                Bonus = GetBonus()
+            };
+
         }
     }
 }

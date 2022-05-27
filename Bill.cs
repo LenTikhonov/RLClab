@@ -9,13 +9,10 @@ namespace RLClab
         private List<Item> _items;
         private Customer _customer;
 
-        private IView _view;
-
-        public Bill(Customer customer, IView view)
+        public Bill(Customer customer)
         {
             _customer = customer;
             _items = new List<Item>();
-            _view = view;
         }
 
         public void AddGoods(Item item)
@@ -23,27 +20,18 @@ namespace RLClab
             _items.Add(item);
         }
 
-        public BillSummary Process() //GetBill
+        public BillSummary Process()
         {
             BillSummary bill = new BillSummary();
             bill.CustomerName = _customer.GetName();
-            List<Item>.Enumerator items = _items.GetEnumerator();
-            while (items.MoveNext())
+            List<Item> items = _items;
+            foreach (var item in items)
             {
-                Item item = items.Current;
-                ItemSummary itemSummary = new ItemSummary
-                {
-                    Name = item.GetGoods().GetTitle(),
-                    Price = item.GetPrice(),
-                    Quantity = item.GetQuantity(),
-                    Sum = GetSumm(item),
-                    Discount = item.GetDiscount(),
-                    Bonus = item.GetBonus()
-                };
+                ItemSummary itemSummary = item.GetItemSummary();
 
                 bill.Items.Add(itemSummary);
 
-                double usedBonus = GetUsedBonus(item, _customer);
+                double usedBonus = item.GetUsedBonus(_customer);
                 itemSummary.ThisAmount = itemSummary.Sum - itemSummary.Discount - usedBonus;
                 bill.TotalAmount += itemSummary.ThisAmount;
                 bill.TotalBonus += itemSummary.Bonus;
@@ -52,22 +40,5 @@ namespace RLClab
             return bill;
         }
 
-        private static double GetUsedBonus(Item item, Customer customer)
-        {
-            if (item.GetGoods().GetType() == typeof(RegularGoods))
-                if (item.GetQuantity() > 5)
-                    return customer.UseBonus((int)(GetSumm(item)));
-
-            if (item.GetGoods().GetType() == typeof(SpecialGoods))
-                if (item.GetQuantity() > 1)
-                    return customer.UseBonus((int)(GetSumm(item)));
-
-            return 0;
-        }
-
-        private static double GetSumm(Item item)
-        {
-            return item.GetQuantity() * item.GetPrice();
-        }
     }
 }

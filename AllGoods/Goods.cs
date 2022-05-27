@@ -16,7 +16,10 @@ namespace RLClab
         {
             return _title;
         }
-
+        public virtual double GetUsedBonus(Item item, Customer customer)
+        {
+            return 0;
+        }
         public virtual int GetBonus(Item item)
         {
             return 0;
