@@ -18,8 +18,9 @@ namespace RLClab
             Bill b1 = new Bill(x, view);
             b1.AddGoods(i1);
             b1.AddGoods(i2);
-            string bill = b1.Process();
-            Console.WriteLine(bill);
+            BillGenerator generator = new BillGenerator(b1, view);
+            string restulBill = generator.Generate();
+            Console.WriteLine(b1);
         }
     }
 }
