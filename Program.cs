@@ -10,17 +10,20 @@ namespace RLClab
     {
         static void Main(string[] args)
         {
-            string filename = "BillInfo.yaml";
+            string filename = "BillInfo.ymal";
 
             if (args.Length == 1)
                 filename = args[0];
 
             FileStream fs = new FileStream(filename, FileMode.Open);
             StreamReader sr = new StreamReader(fs);
+            FileSourceFactory sourceFactory = new FileSourceFactory();
+            IFileSource file = sourceFactory.Create(filename);
+            file.SetSource(sr);
+            BillFactory billFactory = new BillFactory(file);
+            string bill = billFactory.CreateBill();
 
-            string BillFactor = BillFactory.CreateBill(sr);
-
-            Console.WriteLine(BillFactor);
+            Console.WriteLine(bill);
         }
     }
 }

@@ -3,10 +3,20 @@ using System.IO;
 
 namespace RLClab
 {
-    public class ContentFile
+    public class YamlFileSource : IFileSource
     {
         TextReader _source;
         GoodsFactory _goodsFactory = new GoodsFactory();
+
+        public YamlFileSource()
+        {
+
+        }
+
+        public YamlFileSource(TextReader source)
+        {
+            _source = source;
+        }
 
         public void SetSource(TextReader source)
         {
@@ -72,6 +82,11 @@ namespace RLClab
             while (line.StartsWith("#"));
 
             return line;
+        }
+
+        public void CloseFile()
+        {
+            _source.Close();
         }
     }
 }
