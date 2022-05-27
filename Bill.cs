@@ -1,4 +1,5 @@
 ﻿using RLClab.Views;
+using RLClab.BillUpdate;
 using System;
 using System.Collections.Generic;
 namespace RLClab
@@ -22,35 +23,38 @@ namespace RLClab
             _items.Add(item);
         }
 
-        public String Statement()
+        public BillSummary Process() //GetBill
         {
-            double totalAmount = 0;
-            int totalBonus = 0;
+            BillSummary bill = new BillSummary();
+            bill.CustomerName = _customer.GetName();
             List<Item>.Enumerator items = _items.GetEnumerator();
-            String resultBill = _view.GetHeader(_customer.GetName());
             while (items.MoveNext())
             {
-                //определить сумму для каждой строки
                 Item item = items.Current;
-                double discount = item.GetDiscount();
-                int bonus = item.GetBonus();
+                ItemSummary itemSummary = new ItemSummary
+                {
+                    Name = item.GetGoods().GetTitle(),
+                    Price = item.GetPrice(),
+                    Quantity = item.GetQuantity(),
+                    Sum = GetSumm(item),
+                    Discount = item.GetDiscount(),
+                    Bonus = item.GetBonus()
+                };
+
+                bill.Items.Add(itemSummary);
+
                 double usedBonus = GetUsedBonus(item, _customer);
-                // учитываем скидку и бонусы
-                double thisAmount = GetSumm(item) - discount - usedBonus;
-                resultBill += _view.GetBody(thisAmount, discount, bonus, item);
-                totalAmount += thisAmount;
-                totalBonus += bonus;
+                itemSummary.ThisAmount = itemSummary.Sum - itemSummary.Discount - usedBonus;
+                bill.TotalAmount += itemSummary.ThisAmount;
+                bill.TotalBonus += itemSummary.Bonus;
             }
-            resultBill += _view.GetFooter(totalAmount, totalBonus);
-            //Запомнить бонус клиента
-            _customer.ReceiveBonus(totalBonus);
-            return resultBill;
+            _customer.ReceiveBonus(bill.TotalBonus);
+            return bill;
         }
 
         private static double GetUsedBonus(Item item, Customer customer)
         {
             if (item.GetGoods().GetType() == typeof(RegularGoods))
-                // используем бонусы
                 if (item.GetQuantity() > 5)
                     return customer.UseBonus((int)(GetSumm(item)));
 

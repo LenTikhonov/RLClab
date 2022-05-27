@@ -1,4 +1,5 @@
 ﻿using System;
+using RLClab.BillUpdate;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,11 +14,10 @@ namespace RLClab.Views
             return $"Счет для {customerName}\n\tНазвание\tЦена\tКол-воСтоимость\tСкидка\tСумма\tБонус\n";
         }
 
-        public string GetBody(double thisAmount, double discount, int bonus, Item item)
+        public string GetBody(ItemSummary item)
         {
-            //показать результаты
-            return $"\t{item.GetGoods().GetTitle()}\t\t{item.GetPrice()}\t{item.GetQuantity()}\t{(GetSumm(item)).ToString()}" +
-            $"\t{discount.ToString()}\t{thisAmount.ToString()}\t{bonus.ToString()}\n";
+            return $"\t{item.Name}\t\t{item.Price}\t{item.Quantity}\t{item.Sum.ToString()}" +
+            $"\t{item.Discount.ToString()}\t{item.ThisAmount.ToString()}\t{item.Bonus.ToString()}\n";
         }
 
         public string GetFooter(double totalAmount, int totalBonus)
