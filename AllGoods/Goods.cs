@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 namespace RLClab
 {
+    // Класс, который представляет данные о товаре
     public class Goods
     {
         protected String _title;

@@ -1,8 +1,6 @@
-﻿using System;
+﻿using RLClab.Views;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 namespace RLClab
 {
     public class Bill
@@ -10,10 +8,13 @@ namespace RLClab
         private List<Item> _items;
         private Customer _customer;
 
-        public Bill(Customer customer)
+        private IView _view;
+
+        public Bill(Customer customer, IView view)
         {
-            this._customer = customer;
-            this._items = new List<Item>();
+            _customer = customer;
+            _items = new List<Item>();
+            _view = view;
         }
 
         public void AddGoods(Item item)
@@ -26,7 +27,7 @@ namespace RLClab
             double totalAmount = 0;
             int totalBonus = 0;
             List<Item>.Enumerator items = _items.GetEnumerator();
-            String resultBill = GetHeader(_customer.GetName());
+            String resultBill = _view.GetHeader(_customer.GetName());
             while (items.MoveNext())
             {
                 //определить сумму для каждой строки
@@ -36,11 +37,11 @@ namespace RLClab
                 double usedBonus = GetUsedBonus(item, _customer);
                 // учитываем скидку и бонусы
                 double thisAmount = GetSumm(item) - discount - usedBonus;
-                resultBill += GetBody(thisAmount, discount, bonus, item);
+                resultBill += _view.GetBody(thisAmount, discount, bonus, item);
                 totalAmount += thisAmount;
                 totalBonus += bonus;
             }
-            resultBill += GetFooter(totalAmount, totalBonus);
+            resultBill += _view.GetFooter(totalAmount, totalBonus);
             //Запомнить бонус клиента
             _customer.ReceiveBonus(totalBonus);
             return resultBill;
@@ -58,26 +59,6 @@ namespace RLClab
                     return customer.UseBonus((int)(GetSumm(item)));
 
             return 0;
-        }
-
-
-
-        private static string GetHeader(string customerName)
-        {
-            return $"Счет для {customerName}\n\tНазвание\tЦена\tКол-воСтоимость\tСкидка\tСумма\tБонус\n";
-        }
-
-        private static string GetBody(double thisAmount, double discount, int bonus, Item item)
-        {
-            //показать результаты
-            return $"\t{item.GetGoods().GetTitle()}\t\t{item.GetPrice()}\t{item.GetQuantity()}\t{(GetSumm(item)).ToString()}" +
-            $"\t{discount.ToString()}\t{thisAmount.ToString()}\t{bonus.ToString()}\n";
-        }
-
-        private static string GetFooter(double totalAmount, int totalBonus)
-        {
-            //добавить нижний колонтитул
-            return $"Сумма счета составляет {totalAmount.ToString()}\nВы заработали {totalBonus.ToString()} бонусных балов";
         }
 
         private static double GetSumm(Item item)
