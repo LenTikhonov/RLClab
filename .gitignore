@@ -403,3 +403,10 @@ FodyWeavers.xsd
 # End of https://www.toptal.com/developers/gitignore/api/csharp
 obj/Debug/netcoreapp3.1/RLClab.csproj.CoreCompileInputs.cache
 obj/Debug/netcoreapp3.1/RLClab.csproj.CoreCompileInputs.cache
+RLClab.csproj
+obj/RLClab.csproj.nuget.g.targets
+RLClab.csproj
+obj/RLClab.csproj.nuget.g.targets
+obj/RLClab.csproj.nuget.g.props
+obj/project.nuget.cache
+obj/Debug/netcoreapp3.1/RLClab.assets.cache
