@@ -9,15 +9,15 @@ namespace RLClab
 {
     public class FileSourceFactory
     {
-        public IFileSource Create(string path)
+        public IFileSource Create(string path, GoodsFactory goodsFactory)
         {
             string extention = Path.GetExtension(path);
             switch (extention)
             {
                 case ".yaml":
-                    return new YamlFileSource();
+                    return new YamlFileSource(goodsFactory);
                 case ".txt":
-                    return new TxtFileSource();
+                    return new TxtFileSource(goodsFactory);
             }
             return null;
         }

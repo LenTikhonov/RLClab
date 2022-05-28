@@ -6,16 +6,17 @@ namespace RLClab
     public class YamlFileSource : IFileSource
     {
         TextReader _source;
-        GoodsFactory _goodsFactory = new GoodsFactory();
+        GoodsFactory _goodsFactory;
 
-        public YamlFileSource()
+        public YamlFileSource(GoodsFactory goodsFactory)
         {
-
+            _goodsFactory = goodsFactory;
         }
 
-        public YamlFileSource(TextReader source)
+        public YamlFileSource(TextReader source, GoodsFactory goodsFactory)
         {
             _source = source;
+            _goodsFactory = goodsFactory;
         }
 
         public void SetSource(TextReader source)
@@ -50,7 +51,7 @@ namespace RLClab
             result = result[1].Trim().Split();
             string type = result[1].Trim();
 
-            return _goodsFactory.Create(result[1], result[0]);
+            return _goodsFactory.Create(type, result[0]);
         }
 
         public int GetItemsCount()

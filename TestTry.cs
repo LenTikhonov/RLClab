@@ -1,7 +1,10 @@
+using Newtonsoft.Json;
 using NUnit.Framework;
 using RLClab;
 using RLClab.Views;
 using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace RLCTest
 {
@@ -11,7 +14,10 @@ namespace RLCTest
         [Test]
         public void With_SpecialOffer_No_Discount()
         {
-            Goods food = new SpecialGoods("Lays");
+            StreamReader json = new StreamReader("Settings.json");
+            var config = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, Settings>>>(json.ReadToEnd());
+            GoodsFactory goodFactory = new GoodsFactory(config);
+            var food = goodFactory.Create("SPO", "Lays");
             Item i3 = new Item(food, 5, 130);
             Customer x = new Customer("Len", 0);
             IView view = new TxtView();
@@ -26,7 +32,10 @@ namespace RLCTest
         [Test]
         public void With_Regular_No_Discount()
         {
-            Goods food1 = new RegularGoods("potato");
+            StreamReader json = new StreamReader("Settings.json");
+            var config = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, Settings>>>(json.ReadToEnd());
+            GoodsFactory goodFactory = new GoodsFactory(config);
+            var food1 = goodFactory.Create("REG", "potato");
             Item i1 = new Item(food1, 2, 22);
             Customer x = new Customer("Len", 0);
             IView view = new TxtView();
@@ -41,7 +50,10 @@ namespace RLCTest
         [Test]
         public void With_Sales_No_Discount()
         {
-            Goods food2 = new SaleGoods("Orange");
+            StreamReader json = new StreamReader("Settings.json");
+            var config = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, Settings>>>(json.ReadToEnd());
+            GoodsFactory goodFactory = new GoodsFactory(config);
+            var food2 = goodFactory.Create("SAL", "Orange");
             Item i2 = new Item(food2, 3, 15);
             Customer x = new Customer("Len", 0);
             IView view = new TxtView();
@@ -55,7 +67,10 @@ namespace RLCTest
         [Test]
         public void With_SpecialOffer_with_Discount()
         {
-            Goods food3 = new SpecialGoods("Crab");
+            StreamReader json = new StreamReader("Settings.json");
+            var config = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, Settings>>>(json.ReadToEnd());
+            GoodsFactory goodFactory = new GoodsFactory(config);
+            var food3 = goodFactory.Create("SPO", "Crab");
             Item i3 = new Item(food3, 11, 55);
             Customer x = new Customer("Len", 0);
             IView view = new TxtView();
@@ -70,22 +85,28 @@ namespace RLCTest
         [Test]
         public void With_Regular_with_Discount()
         {
-            Goods food4 = new RegularGoods("Aloe");
-            Item i1 = new Item(food4, 4, 24);
+            StreamReader json = new StreamReader("Settings.json");
+            var config = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, Settings>>>(json.ReadToEnd());
+            GoodsFactory goodFactory = new GoodsFactory(config);
+            var food4 = goodFactory.Create("REG", "Aloe");
+            Item i1 = new Item(food4, 4, 23);
             Customer x = new Customer("Len", 0);
             IView view = new TxtView();
             Bill bill = new Bill(x);
             bill.AddGoods(i1);
             BillGenerator generator = new BillGenerator(bill, view);
             string actual = generator.Generate();
-            string expected = "Счет для Len\n\tНазвание\tЦена\tКол-воСтоимость\tСкидка\tСумма\tБонус\n\tAloe\t\t24\t4\t96\t2,88\t93,12\t4,656\nСумма счета составляет 93,12\nВы заработали 4,656 бонусных балов";
+            string expected = "Счет для test\n\tНазвание\tЦена\tКол-воСтоимость\tСкидка\tСумма\tБонус\n\tPepsi\t\t40\t4\t160\t0,8\t159,2\t0\nСумма счета составляет 159,2\nВы заработали 0 бонусных балов";
             Assert.AreEqual(expected, actual);
         }
 
         [Test]
         public void With_Sales_with_Discount()
         {
-            Goods food5 = new SaleGoods("Milk");
+            StreamReader json = new StreamReader("Settings.json");
+            var config = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, Settings>>>(json.ReadToEnd());
+            GoodsFactory goodFactory = new GoodsFactory(config);
+            var food5 = goodFactory.Create("SAL", "Milk");
             Item i2 = new Item(food5, 5, 85);
             Customer x = new Customer("Len", 0);
             IView view = new TxtView();
@@ -99,8 +120,11 @@ namespace RLCTest
         [Test]
         public void With_SpecialOffer_with_FullBonus()
         {
-            Goods food5 = new SpecialGoods("Bread");
-            Item i3 = new Item(food5, 3, 42);
+            StreamReader json = new StreamReader("Settings.json");
+            var config = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, Settings>>>(json.ReadToEnd());
+            GoodsFactory goodFactory = new GoodsFactory(config);
+            var food6 = goodFactory.Create("SPO", "Bread");
+            Item i3 = new Item(food6, 3, 42);
             Customer x = new Customer("Len", 500);
             IView view = new TxtView();
             Bill bill = new Bill(x);
@@ -114,8 +138,11 @@ namespace RLCTest
         [Test]
         public void With_Regular_with_FullBonus()
         {
-            Goods food6 = new RegularGoods("Fish");
-            Item i1 = new Item(food6, 7, 12);
+            StreamReader json = new StreamReader("Settings.json");
+            var config = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, Settings>>>(json.ReadToEnd());
+            GoodsFactory goodFactory = new GoodsFactory(config);
+            var food7 = goodFactory.Create("REG", "Fish");
+            Item i1 = new Item(food7, 7, 12);
             Customer x = new Customer("Len", 500);
             IView view = new TxtView();
             Bill bill = new Bill(x);

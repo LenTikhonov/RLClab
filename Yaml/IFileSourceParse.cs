@@ -10,16 +10,17 @@ namespace RLClab
     public class TxtFileSource : IFileSource
     {
         TextReader _source;
-        GoodsFactory _goodsFactory = new GoodsFactory();
+        GoodsFactory _goodsFactory;
 
-        public TxtFileSource()
+        public TxtFileSource(GoodsFactory goodsFactory)
         {
-
+            _goodsFactory = goodsFactory;
         }
 
-        public TxtFileSource(TextReader source)
+        public TxtFileSource(TextReader source, GoodsFactory goodsFactory)
         {
             _source = source;
+            _goodsFactory = goodsFactory;
         }
 
         public void SetSource(TextReader source)
@@ -54,7 +55,7 @@ namespace RLClab
             result = result[1].Trim().Split();
             string type = result[1].Trim();
 
-            return _goodsFactory.Create(result[1], result[0]);
+            return _goodsFactory.Create(type, result[0]);
         }
 
         public int GetItemsCount()

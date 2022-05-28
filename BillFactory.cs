@@ -13,7 +13,7 @@ namespace RLClab
             _file = file;
         }
 
-        public string CreateBill()
+        public BillGenerator CreateBill()
         {
             IView view = new TxtView();
 
@@ -34,11 +34,8 @@ namespace RLClab
                 Item item = _file.GetNextItem(goodsInBill);
                 resultBill.AddGoods(item);
             }
-
-            BillGenerator generator = new BillGenerator(resultBill, view);
-            string bill = generator.Generate();
             _file.CloseFile();
-            return bill;
+            return new BillGenerator(resultBill, view);
         }
     }
 }
